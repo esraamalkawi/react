@@ -58,3 +58,18 @@
     margin-right: auto;
     width: 50%;
 }
+
+.prouduct-image{
+  size: 20px ;
+  width: 200px;
+  height: 200px;
+}
+
+.product-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
