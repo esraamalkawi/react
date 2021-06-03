@@ -1,14 +1,12 @@
 import products from "../products";
+import ProductsItem from "./ProductItem";
+import { ProductList } from "./stayles";
 
-const Products = () => {
+const Productslist = () => {
   const productsList = products.map((product) => (
-    <div>
-      <p>{product.name}</p>
-      <p>{product.price} $</p>
-      <img src={product.image} className="prouduct-image" />
-    </div>
+    <ProductsItem product={product} key={product.id} />
   ));
-  return <div className="product-list">{productsList}</div>;
+  return <ProductList>{productsList}</ProductList>;
 };
 
-export default Products;
+export default Productslist;
