@@ -5,7 +5,10 @@ const ProductItem = (props) => {
     <div>
       <p>{props.product.name}</p>
       <p>{props.product.price} $</p>
-      <ProuductImage src={props.product.image} />
+      <ProuductImage
+        onClick={() => props.setProduct(props.product)}
+        src={props.product.image}
+      />
     </div>
   );
 };
