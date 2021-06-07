@@ -1,4 +1,5 @@
 import { DetailWrapper } from "./stayles";
+import DeletButton from "./buttons/DeleteButton";
 const ProductDetail = (props) => {
   return (
     <DetailWrapper>
@@ -13,6 +14,10 @@ const ProductDetail = (props) => {
       >
         Go back
       </button>
+      <DeletButton
+        deleteProducts={props.deleteProducts}
+        productId={props.product.id}
+      />
     </DetailWrapper>
   );
 };

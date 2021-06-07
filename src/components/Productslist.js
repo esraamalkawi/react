@@ -1,5 +1,4 @@
 import { useState } from "react";
-import products from "../products";
 import ProductsItem from "./ProductItem";
 import { ProductList } from "./stayles";
 import SearchBar from "./SearchBar";
@@ -7,7 +6,7 @@ import SearchBar from "./SearchBar";
 const Productslist = (props) => {
   const [query, setQuery] = useState("");
 
-  let filtered = products
+  let filtered = props.products
     .filter((product) =>
       product.name.toUpperCase().includes(query.toUpperCase())
     )
@@ -16,6 +15,7 @@ const Productslist = (props) => {
         product={product}
         setProduct={props.setProduct}
         key={product.id}
+        deleteProducts={props.deleteProducts}
       />
     ));
   return (

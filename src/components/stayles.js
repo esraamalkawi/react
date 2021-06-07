@@ -88,3 +88,9 @@ export const DetailWrapper = styled.div`
   margin-right: auto;
   width: 80%;
 `;
+export const DeletButtonStyled = styled.button`
+  font-size: 1em;
+  margin: 1.25em;
+  padding: 0.25em 1em;
+  border-radius: 3px;
+`;

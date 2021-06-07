@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme, GlobalStayle, ThemeButton } from "./components/stayles";
 import ProductDetail from "./components/ProuductDetail";
+import _products from "./products";
 
 function App() {
   const [currentTheme, setcurrentTheme] = useState(theme.light);
@@ -23,8 +24,27 @@ function App() {
   const [product, setProduct] = useState(null);
   const setView = () => {
     if (product)
-      return <ProductDetail product={product} setProduct={setProduct} />;
-    else return <Productslist setProduct={setProduct} />;
+      return (
+        <ProductDetail
+          product={product}
+          setProduct={setProduct}
+          deleteProducts={deleteProducts}
+        />
+      );
+    else
+      return (
+        <Productslist
+          setProduct={setProduct}
+          products={products}
+          deleteProducts={deleteProducts}
+        />
+      );
+  };
+  const [products, setProducts] = useState(_products);
+  const deleteProducts = (productId) => {
+    const afterDelete = products.filter((product) => productId !== product.id);
+    setProducts(afterDelete);
+    setProduct(null);
   };
 
   return (
