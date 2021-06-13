@@ -1,17 +1,21 @@
 import { ProuductImage } from "./stayles";
 import DeletButton from "./buttons/DeleteButton";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../store/actions";
+
 const ProductItem = (props) => {
+  const dispatch = useDispatch();
   return (
     <div>
-      <ProuductImage
-        onClick={() => props.setProduct(props.product)}
-        src={props.product.image}
-      />
+      <Link to={`/products/${props.product.slug}`}>
+        <ProuductImage src={props.product.image} />
+      </Link>
       <p>{props.product.name}</p>
       <p>{props.product.price} $</p>
       <DeletButton
-        deleteProducts={props.deleteProducts}
-        productId={props.product.id}
+        onClick={() => dispatch(deleteProduct(props.product.id))}
+        // productId={props.product.id}
       />
     </div>
   );

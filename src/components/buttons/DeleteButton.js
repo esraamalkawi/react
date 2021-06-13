@@ -1,13 +1,15 @@
 import { DeletButtonStyled } from "../stayles";
 import { FaBeer } from "react-icons/fa";
+import { deleteProduct } from "../../store/actions";
 
 const DeletButton = (props) => {
   const handelDelete = (productId) => {
+    console.log(productId, "helooo");
     props.deleteProducts(productId);
   };
 
   return (
-    <DeletButtonStyled onClick={() => handelDelete(props.productId)}>
+    <DeletButtonStyled onClick={props.onClick}>
       <FaBeer />
     </DeletButtonStyled>
   );

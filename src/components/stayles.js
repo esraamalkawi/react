@@ -1,3 +1,4 @@
+import { Link, NavLink } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 
 export const Head = styled.h1`
@@ -93,4 +94,34 @@ export const DeletButtonStyled = styled.button`
   margin: 1.25em;
   padding: 0.25em 1em;
   border-radius: 3px;
+`;
+
+export const NavProduct = styled(NavLink)`
+  color: ${(props) => props.theme.mainColor};
+  padding: -20px;
+
+  &.active {
+    color: green;
+  }
+`;
+export const Logo = styled(Link)`
+  padding: -10px;
+
+  &.img {
+    width: 5%;
+    height: 5%;
+  }
+`;
+
+// export const ButtonsTheme = styled.button`
+//   font-size: 1em;
+//   margin: 1.25em;
+//   padding: 0.25em 1em;
+//   border-radius: 3px;
+//   background-color: ${(props) => props.theme.mainColor};
+// `;
+
+export const UpdateButtonStyled = styled.button`
+  background-color: #e7e7e7;
+  color: black;
 `;
