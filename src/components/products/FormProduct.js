@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../store/actions";
+import { addProduct } from "../../store/actions/productActions";
 import { useHistory } from "react-router-dom";
-import { updateProduct } from "../store/actions";
+import { updateProduct } from "../../store/actions/productActions";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 
 const FormProduct = () => {
-  const productSlug = useParams().productSlug;
-  const products = useSelector((state) => state.products);
+  const productsSlug = useParams().productSlug;
+  const shopId = useParams().shopId;
+  const products = useSelector((state) => state.products.products);
   const updatedProduct = products.find(
-    (product) => product.slug === productSlug
+    (product) => product.slug === productsSlug
   );
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,15 +31,20 @@ const FormProduct = () => {
     // console.log(product);
     event.preventDefault();
     if (updatedProduct) dispatch(updateProduct(product));
-    else dispatch(addProduct(product));
+    else dispatch(addProduct(product, shopId));
     history.push("/products");
   };
+
+  const handleImage = (event) => {
+    setProduct({ ...product, image: event.target.files[0] });
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div class="form-group">
+      <div className="form-group">
         <label for="exampleInputEmail1">Product name</label>
         <input
-          class="form-control"
+          className="form-control"
           type="text"
           placeholder="product name"
           name="name"
@@ -46,10 +52,10 @@ const FormProduct = () => {
           onChange={handleChange}
         ></input>
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label for="exampleInputPassword1">product price</label>
         <input
-          class="form-control"
+          className="form-control"
           type="number"
           placeholder="product price"
           name="price"
@@ -57,21 +63,20 @@ const FormProduct = () => {
           onChange={handleChange}
         ></input>
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label for="exampleInputPassword1">product image adress</label>
         <input
-          class="form-control"
-          type="text"
+          className="form-control"
+          type="file"
           placeholder="product image"
           name="image"
-          value={product.image}
-          onChange={handleChange}
+          onChange={handleImage}
         ></input>
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label for="exampleInputPassword1">product details</label>
         <input
-          class="form-control"
+          className="form-control"
           type="text"
           placeholder="product details"
           name="details"
@@ -79,8 +84,8 @@ const FormProduct = () => {
           onChange={handleChange}
         ></input>
       </div>
-      <button type="submit" class="btn btn-default">
-        {updatedProduct ? "Update" : "Submit"}
+      <button type="submit" className="btn btn-default">
+        {updatedProduct ? "Update" : "add"}
       </button>
     </form>
   );

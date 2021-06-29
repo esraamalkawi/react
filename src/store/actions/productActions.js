@@ -1,16 +1,12 @@
 import axios from "axios";
-
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const CREATE_PRODUCT = "ADD_PRODUCT";
-export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
-export const FETCH_PRODUCT = "FETCH_PRODUCT";
+import * as actionTypes from "./types";
 
 export const deleteProduct = (productId) => {
   return async (dispatch) => {
     try {
       await axios.delete(`http://localhost:8000/products/${productId}`);
       dispatch({
-        type: DELETE_PRODUCT,
+        type: actionTypes.DELETE_PRODUCT,
         payload: {
           productId: productId,
         },
@@ -20,16 +16,18 @@ export const deleteProduct = (productId) => {
     }
   };
 };
-export const addProduct = (newProduct) => {
+export const addProduct = (newProduct, shopId) => {
   return async (dispatch) => {
     try {
+      const formData = new FormData();
+      for (const key in newProduct) formData.append(key, newProduct[key]);
       const res = await axios.post(
-        "http://localhost:8000/products",
-        newProduct
+        `http://localhost:8000/shops/${shopId}/products`,
+        formData
       );
       dispatch({
-        type: CREATE_PRODUCT,
-        payload: res.data,
+        type: actionTypes.CREATE_PRODUCT,
+        payload: { newProduct: res.data },
       });
     } catch (error) {
       console.log(error);
@@ -40,12 +38,15 @@ export const addProduct = (newProduct) => {
 export const updateProduct = (updatedProduct) => {
   return async (dispatch) => {
     try {
+      const formData = new FormData();
+      for (const key in updatedProduct)
+        formData.append(key, updatedProduct[key]);
       const res = await axios.put(
         `http://localhost:8000/products/${updatedProduct.id}`,
-        updatedProduct
+        formData
       );
       dispatch({
-        type: UPDATE_PRODUCT,
+        type: actionTypes.UPDATE_PRODUCT,
         payload: { updatedProduct: res.data },
       });
     } catch (error) {
@@ -59,7 +60,7 @@ export const fetchProducts = () => {
     try {
       const res = await axios.get("http://localhost:8000/products");
       dispatch({
-        type: FETCH_PRODUCT,
+        type: actionTypes.FETCH_PRODUCT,
         payload: res.data,
       });
     } catch (error) {

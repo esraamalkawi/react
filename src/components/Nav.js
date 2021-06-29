@@ -40,7 +40,15 @@ const NavBar = (props) => {
           style={{ padding: "0.25em 1em" }}
         >
           {" "}
-          product
+          products
+        </NavProduct>
+        <NavProduct
+          to="/shops"
+          className="nav-item"
+          style={{ padding: "0.25em 1em" }}
+        >
+          {" "}
+          shops
         </NavProduct>
         {/* <ThemeButton className="nav-item" onClick={props.toggleTheme}>
               {props.currentTheme === "Light" ? "Dark" : "Light"} Mode

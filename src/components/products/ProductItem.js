@@ -1,8 +1,8 @@
-import { ProuductImage } from "./stayles";
-import DeletButton from "./buttons/DeleteButton";
+import { ProuductImage } from "../stayles";
+import DeletButton from "../buttons/DeleteButton";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteProduct } from "../store/actions";
+import { deleteProduct } from "../../store/actions/productActions";
 
 const ProductItem = (props) => {
   const dispatch = useDispatch();
