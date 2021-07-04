@@ -50,6 +50,15 @@ const NavBar = (props) => {
           {" "}
           shops
         </NavProduct>
+
+        <NavProduct
+          to="/signup"
+          className="nav-item"
+          style={{ padding: "0.25em 1em" }}
+        >
+          {" "}
+          signup
+        </NavProduct>
         {/* <ThemeButton className="nav-item" onClick={props.toggleTheme}>
               {props.currentTheme === "Light" ? "Dark" : "Light"} Mode
             </ThemeButton> */}

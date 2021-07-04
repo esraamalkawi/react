@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   products: [],
+  loading: true,
 };
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -30,6 +31,7 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+        loading: false,
       };
     default:
       return state;

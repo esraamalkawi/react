@@ -1,20 +1,18 @@
 //components
-import Home from "./components/Home";
-import Productslist from "./components/products/Productslist";
-import ShopList from "./components/shops/ShopList";
-
+import Routes from "./components/Routes";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { theme, GlobalStayle, ThemeButton } from "./components/stayles";
-import ProductDetail from "./components/products/ProuductDetail";
+
 import _products from "./products";
-import { Route, Switch, useParams } from "react-router";
+
 import NavBar from "./components/Nav";
-import FormProduct from "./components/products/FormProduct";
-import ShopDetail from "./components/shops/ShopDetail";
-import { useSelector } from "react-redux";
 
 function App() {
+  const products = useSelector((state) => state.products.products);
+  const loadingProducts = useSelector((state) => state.products.loading);
+  const loadingShops = useSelector((state) => state.products.loading);
   const [currentTheme, setcurrentTheme] = useState(theme.light);
   const [iconName, seticonName] = useState("Dark theme");
   const changeTheme = () => {
@@ -60,45 +58,12 @@ function App() {
         <GlobalStayle />
         <ThemeButton onClick={changeTheme}> {iconName} </ThemeButton>
         <NavBar iconName={iconName} />
-        <Switch>
-          <Route
-            path={[
-              "/shops/:shopId/products/new",
-              "/products/:productsSlug/edit",
-            ]}
-          >
-            <FormProduct />
-          </Route>
-          <Route path="/products/:productsSlug">
-            <ProductDetail
-            // products={products}
-            // deleteProducts={deleteProducts}
-            />
-          </Route>
-          <Route path="/shops/:shopId">
-            <ShopDetail
-            // products={products}
-            // deleteProducts={deleteProducts}
-            />
-          </Route>
-          <Route path="/products">
-            <Productslist
-            // setProduct={setProduct}
-            // products={products}
-            // deleteProducts={deleteProducts}
-            />
-          </Route>
-          <Route path="/shops">
-            <ShopList
-            // setProduct={setProduct}
-            // products={products}
-            // deleteProducts={deleteProducts}
-            />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-        </Switch>
+        {loadingProducts || loadingShops ? (
+          <h3>loading...</h3>
+        ) : (
+          <Routes products={products} />
+        )}
+
         {/* 
        
         {/* {setView()} */}

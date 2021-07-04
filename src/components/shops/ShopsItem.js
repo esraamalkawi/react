@@ -8,7 +8,7 @@ const ShopItem = (props) => {
   // const dispatch = useDispatch();
   return (
     <div>
-      <Link to={`/shops/${props.shop.slug}`}>
+      <Link to={`/shops/${props.shop.id}`}>
         <ProuductImage src={props.shop.image} />
       </Link>
       <p>{props.shop.name}</p>

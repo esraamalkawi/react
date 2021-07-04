@@ -8,11 +8,12 @@ import { useSelector } from "react-redux";
 
 const ShopDetail = () => {
   const shopId = useParams().shopId;
+  console.log(useParams().shopId);
   //   const shopsSlug = useParams().shopsSlug;
   //   const dispatch = useDispatch();
   const shops = useSelector((state) => state.shops.shops);
-  const shop = shops.find((shop) => shop.id === shopId);
-  console.log(shopId);
+  const shop = shops.find((shop) => shop.id === +shopId);
+  //console.log(shopId);
   if (!shop) return <Redirect to="/" />;
 
   return (
